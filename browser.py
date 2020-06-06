@@ -4,6 +4,9 @@ from time import sleep
 from string import ascii_letters
 from subprocess import getoutput as shell
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
@@ -20,16 +23,26 @@ class Browser(object):
             profile = webdriver.FirefoxProfile()
             profile.set_preference(
                 "general.useragent.override", self.getRandomUserAgent())
-            profile.set_preference("browser.privatebrowsing.autostart", True)
-            browser = webdriver.Firefox(profile)
-            if not browser.get(url, timeout=5.0):
-                print(f"Url {url} not reachable")
-                return
-            # [shell(f'cat ${f} >> file.html')
+            # Browser Options
+            options = Options()
+            options.headless = True
+            # Private Browsing
+            profile.set_preference("browser.privatebrowsing.autostart", False)
+            # Gecko Driver Logs
+            browser = webdriver.Firefox(
+                service_log_path='/tmp/geckodriver.log')
+            wait = WebDriverWait(browser, 3)
+            visible = EC.visibility_of_element_located
+            # Visit Page
+            browser.get(url)
+
+            # play the video
+            wait.until(visible((By.ID, "video-title")))
+            browser.find_element_by_id("video-title").click()
 
             # Apply more intelligent method later
             # Min 30 because video should be watched atleast 30 sec to get a view
-            sleepTime = random.randint(30, 50)
+            sleepTime = random.randint(40, 50)
             sleep(sleepTime)
 
             # Watching Video is Done, so now lets search for something so that

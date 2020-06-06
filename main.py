@@ -13,7 +13,7 @@ class Views(Browser, Tor):
         self.recentIPs = []
         self.alive = True
         self.views = {}
-        self.bots = 5
+        self.bots = 1
         self.ip = None
         if self.urls == [] or self.urls is None:
             exit("Please provide valid number of urls")

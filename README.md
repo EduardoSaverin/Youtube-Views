@@ -1,12 +1,14 @@
-# Youtube View Increaser ;)
+# Youtube View Increaser
 
 A python based program who's job is to increase provided youtube urls video views.
+
+---
 
 ### Prerequisite
 * `Python >= 3.1`
 * `Tor (with Password)`
 * `Firefox >= 60`
-* `Selenium Gecko Driver PATH being set`
+* ~~Selenium Gecko Driver PATH being set~~ `sudo apt-get install firefox-geckodriver`
 
 ### Setup
 I would suggest you to create `python virtual env` for this project. Next clone this repo, go inside downloaded repo and run :
@@ -25,3 +27,11 @@ Example :
 ```shell
 python main.py 1 https://www.youtube.com/watch?v=WNeLUngb-Xg
 ```
+
+### TODO
+* Skip Ads gracefully and cover the time lost while watching ad.
+* Once watched video search for something before closing browser.
+
+***
+
+__NOTES__ : Your geckodriver and firefox needs to be compatible with each other. 
